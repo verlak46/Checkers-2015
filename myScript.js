@@ -33,6 +33,7 @@ $(document).ready(function(){
     	}
     	else {
     		if (isPiece(x, y)) {
+    			pieceColor = TURN;
     			return;
     		} else {
     			if (isValidMove()) {
