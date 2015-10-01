@@ -154,12 +154,6 @@ function initializeArrays() {
 		[empty, piece17, empty, piece18, empty, piece19, empty, piece20],
 		[piece21, empty, piece22, empty, piece23, empty, piece24, empty],
 	];
-
-	//jugador1 = [piece1, piece2, piece3, piece4, piece5,
-	 //piece6, piece7, piece8, piece9, piece10, piece11, piece12];
-
-	//jugador2 = [piece13, piece14, piece15, piece16, piece17, piece18,
-	 //piece19, piece20, piece21, piece22, piece23, piece24];
 }
 
 function isPiece(x, y) {
@@ -175,6 +169,19 @@ function isPiece(x, y) {
 
 function isValidMove(x, y) {
 	var move = false;
+	if (selectedPiece.team === dark) {
+		// Forward
+		if ($selectedSquare.attr('data-positionX') < selectedPiece.positionX) {
+			move = true;
+		}
+	}
+
+	if (selectedPiece.team === light) {
+		// Forward
+		if ($selectedSquare.attr('data-positionX') > selectedPiece.positionX) {
+			move = true;
+		}
+	}
 
 	return move;
 }
