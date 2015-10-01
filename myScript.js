@@ -33,8 +33,15 @@ $(document).ready(function(){
     	}
     	else {
     		if (isPiece(x, y)) {
-    			pieceColor = TURN;
-    			return;
+    			if (TURN == pieceColor) {
+    				selectedPiece = board[x][y];
+	    			$antSquare.css('background-color','black');
+	    			$antSquare = $selectedSquare;
+	    			$selectedSquare.css('background-color','yellow');
+	    			firstClick = false;
+    			} else {
+    				pieceColor = TURN;
+    			}
     		} else {
     			if (isValidMove()) {
 	    			selectedPiece.move(x, y);
