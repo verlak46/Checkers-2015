@@ -1,0 +1,48 @@
+div#game {
+    position:relative;
+}
+
+div#board {
+    float:left;
+    
+    height:464px;
+    width:464px;
+    
+    border-style:solid;
+    border-width:9px;
+    border-color:#DEB887;
+}
+
+div.square_light {
+	float:left;
+    
+    position:relative;
+    
+    width:56px;
+    height:56px;
+
+    border-width:2px;
+    border-right-style:solid;
+    border-bottom-style:solid;
+    border-color:#444;
+    background-color:#ccc;
+}
+
+div.square_dark {
+	float:left;
+    
+    position:relative;
+    
+    width:56px;
+    height:56px;
+
+    border-width:2px;
+    border-right-style:solid;
+    border-bottom-style:solid;
+    border-color:#444;
+    background-color:black;
+}
+
+div#meta {
+    float:right;
+}
