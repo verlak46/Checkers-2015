@@ -36,15 +36,17 @@ $(document).ready(function(){
     		if (isPiece(x, y)) {
     			return;
     		} else {
-    			if (isValidMove(x, y)) {
+    			if (isValidMove()) {
 	    			selectedPiece.move(x, y);
 		    		console.log(board);
 		    		if (pieceColor == dark) {
 		    			TURN = light;
 		    			$('#turno').text("Rojas");
+		    			$('#turno').css('color', 'red');
 		    		} else if (pieceColor == light) {
 		    			TURN = dark;
 		    			$('#turno').text("Negras");
+		    			$('#turno').css('color', 'black');
 		    		}
 		    			firstClick = true;
 	    		}
@@ -167,19 +169,28 @@ function isPiece(x, y) {
 	return piece;
 }
 
-function isValidMove(x, y) {
+function isValidMove() {
 	var move = false;
+	var x = $selectedSquare.attr('data-positionX');
+	var y = $selectedSquare.attr('data-positionY');
+
 	if (selectedPiece.team === dark) {
 		// Forward
-		if ($selectedSquare.attr('data-positionX') < selectedPiece.positionX) {
-			move = true;
+		if (x < selectedPiece.positionX) {
+			// Diagonal
+			if (((selectedPiece.positionY - 1) == y) || ((selectedPiece.positionY + 1) == y)) {
+				move = true;
+			}	
 		}
 	}
 
 	if (selectedPiece.team === light) {
 		// Forward
-		if ($selectedSquare.attr('data-positionX') > selectedPiece.positionX) {
-			move = true;
+		if (x > selectedPiece.positionX) {
+			// Diagonal
+			if (((selectedPiece.positionY - 1) == y) || ((selectedPiece.positionY + 1) == y)) {
+				move = true;
+			}
 		}
 	}
 

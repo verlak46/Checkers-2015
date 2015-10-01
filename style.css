@@ -44,5 +44,7 @@ div.square_dark {
 }
 
 div#meta {
-    float:right;
+    position:relative;
+    float:left;
+    margin-left:35px;
 }
