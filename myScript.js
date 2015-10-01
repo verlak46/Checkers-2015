@@ -18,14 +18,13 @@ $(document).ready(function(){
     	$selectedSquare = $(this);
 	    var x = $selectedSquare.attr('data-positionX');
 	    var y = $selectedSquare.attr('data-positionY');
+	    console.log("selectedSquare:" +x + "," + y);
 
     	if (firstClick) {
-    		//console.log("firsClick");
 	    	if (isPiece(x, y)) {
-	    		//console.log("insidefirstClick");
-	    		//console.log(TURN, pieceColor);
 	    		if (TURN == pieceColor) {
 		    		selectedPiece = board[x][y];
+		    		console.log("selectedPiece:" + selectedPiece.positionX + "," + selectedPiece.positionY);
 		    		$antSquare = $selectedSquare;
 		    		$selectedSquare.css('background-color','yellow');
 		    		firstClick = false;
@@ -162,7 +161,7 @@ function isPiece(x, y) {
 	var piece = false;
 	if (board[x][y] != empty) {
 	 	pieceColor = board[x][y].team;
-	 	console.log(pieceColor);
+	 	console.log(pieceColor + " clicked");
 		piece=true;
 	}
 
@@ -171,16 +170,21 @@ function isPiece(x, y) {
 
 function isValidMove() {
 	var move = false;
-	var x = $selectedSquare.attr('data-positionX');
-	var y = $selectedSquare.attr('data-positionY');
+	var x = $selectedSquare.attr("data-positionX");
+	var y = $selectedSquare.attr("data-positionY");
 
 	if (selectedPiece.team === dark) {
 		// Forward
 		if (x < selectedPiece.positionX) {
 			// Diagonal
-			if (((selectedPiece.positionY - 1) == y) || ((selectedPiece.positionY + 1) == y)) {
+			if ((parseInt(selectedPiece.positionY) - 1) == y) {
+				console.log("move permited");
 				move = true;
-			}	
+			}
+			if ((parseInt(selectedPiece.positionY) + 1) == y) {
+				console.log("move permited");
+				move = true;
+			}		
 		}
 	}
 
@@ -188,7 +192,12 @@ function isValidMove() {
 		// Forward
 		if (x > selectedPiece.positionX) {
 			// Diagonal
-			if (((selectedPiece.positionY - 1) == y) || ((selectedPiece.positionY + 1) == y)) {
+			if ((parseInt(selectedPiece.positionY) - 1) == y) {
+				console.log("move permited");
+				move = true;
+			}
+			if ((parseInt(selectedPiece.positionY) + 1) == y) {
+				console.log("move permited");
 				move = true;
 			}
 		}
