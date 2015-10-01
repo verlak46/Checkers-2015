@@ -36,18 +36,18 @@ $(document).ready(function(){
     		if (isPiece(x, y)) {
     			return;
     		} else {
-	    		selectedPiece.move(x, y);
-	    		//selectedPiece = undefined;
-	    		//$selectedSquare = undefined;
-	    		console.log(board);
-	    		if (pieceColor == dark) {
-	    			TURN = light;
-	    			$('#turno').text("Rojas");
-	    		} else if (pieceColor == light) {
-	    			TURN = dark;
-	    			$('#turno').text("Negras");
+    			if (isValidMove(x, y)) {
+	    			selectedPiece.move(x, y);
+		    		console.log(board);
+		    		if (pieceColor == dark) {
+		    			TURN = light;
+		    			$('#turno').text("Rojas");
+		    		} else if (pieceColor == light) {
+		    			TURN = dark;
+		    			$('#turno').text("Negras");
+		    		}
+		    			firstClick = true;
 	    		}
-	    		firstClick = true;
     		}
     	}
 	});
@@ -171,4 +171,10 @@ function isPiece(x, y) {
 	}
 
 	return piece;
+}
+
+function isValidMove(x, y) {
+	var move = false;
+
+	return move;
 }
