@@ -8,6 +8,8 @@ var pieceColor;
 var firstClick = true;
 const dark = "dark", light = "light", empty = "empty"; 
 var TURN = dark;
+var darkPieces = 12;
+var lightPieces = 12;
 
 $(document).ready(function(){
 	initializeArrays();
@@ -184,32 +186,106 @@ function isValidMove() {
 	if (selectedPiece.team === dark) {
 		// Forward
 		if (x < selectedPiece.positionX) {
-			// Diagonal
-			if ((parseInt(selectedPiece.positionY) - 1) == y) {
-				console.log("move permited");
+			// Diagonal 1 row
+			if (((parseInt(selectedPiece.positionY) - 1) == y) ||
+				(parseInt(selectedPiece.positionY) + 1) == y) {
+				console.log("move 1 row");
 				move = true;
 			}
-			if ((parseInt(selectedPiece.positionY) + 1) == y) {
-				console.log("move permited");
-				move = true;
-			}		
+
+			// Diagonal 2 row
+			if (((parseInt(selectedPiece.positionY) - 2) == y) ||
+					(parseInt(selectedPiece.positionY) + 2) == y) {
+					if (isRivalPiece()) {
+						console.log("move 2 row");
+						move = true;
+					}
+			}
 		}
 	}
+
 
 	if (selectedPiece.team === light) {
 		// Forward
 		if (x > selectedPiece.positionX) {
-			// Diagonal
-			if ((parseInt(selectedPiece.positionY) - 1) == y) {
-				console.log("move permited");
+			// Diagonal 1 row
+			if (((parseInt(selectedPiece.positionY) - 1) == y) ||
+				(parseInt(selectedPiece.positionY) + 1) == y) {
+				console.log("move 1 row");
 				move = true;
 			}
-			if ((parseInt(selectedPiece.positionY) + 1) == y) {
-				console.log("move permited");
-				move = true;
+
+			// Diagonal 2 row
+			if (((parseInt(selectedPiece.positionY) - 2) == y) ||
+				(parseInt(selectedPiece.positionY) + 2) == y) {
+				if (isRivalPiece()) {
+					console.log("move 2 row");
+					move = true;
+				}
 			}
 		}
 	}
+	
 
 	return move;
+}
+
+function isRivalPiece() {
+	var isRival = false;
+	
+	var y_minus = parseInt(selectedPiece.positionY) - 1;
+	var y_more = parseInt(selectedPiece.positionY) + 1;
+
+	if (TURN == dark) {
+		var x = parseInt(selectedPiece.positionX) - 1;
+
+		if (board[x][y_minus] != empty) {
+			board[x][y_minus] = empty;
+			$('div.square_dark[data-positionX="'+x+'"][data-positionY="'+y_minus+'"]')
+				.css('background-image', 'none');
+			lightPieces--;
+			$('#rojas').text(lightPieces);
+			isRival = true;
+			console.log("isRival");
+			return isRival;
+		}
+
+		if (board[x][y_more] != empty) {
+			board[x][y_more] = empty;
+			$('div.square_dark[data-positionX="'+x+'"][data-positionY="'+y_more+'"]')
+				.css('background-image', 'none');
+			lightPieces--;
+			$('#rojas').text(lightPieces);
+			isRival = true;
+			console.log("isRival");
+			return isRival;
+		}
+	}
+
+	if (TURN == light) {
+		var x = parseInt(selectedPiece.positionX) + 1;
+
+		if (board[x][y_minus] != empty) {
+			board[x][y_minus] = empty;
+			$('div.square_dark[data-positionX="'+x+'"][data-positionY="'+y_minus+'"]')
+				.css('background-image', 'none');
+			darkPieces--;
+			$('#negras').text(darkPieces); 
+			isRival = true;
+			console.log("isRival");
+			return isRival;
+		}
+
+		if (board[x][y_more] != empty) {
+			board[x][y_more] = empty;
+			$('div.square_dark[data-positionX="'+x+'"][data-positionY="'+y_more+'"]')
+				.css('background-image', 'none');
+			darkPieces--;
+			$('#negras').text(darkPieces);  
+			isRival = true;
+			console.log("isRival");
+			return isRival;
+		}
+	}
+	return isRival;
 }

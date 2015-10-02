@@ -13,6 +13,23 @@ div#board {
     border-color:#DEB887;
 }
 
+div#meta {
+    position:relative;
+    float:left;
+    margin-left:35px;
+    border-style:solid;
+    border-width:3px;
+    border-color:#DEB887;
+}
+
+div#pieces {
+    float:left;
+    margin-left:35px;
+    border-style:solid;
+    border-width:3px;
+    border-color:#DEB887;
+}
+
 div.square_light {
 	float:left;
     
@@ -41,10 +58,4 @@ div.square_dark {
     border-bottom-style:solid;
     border-color:#444;
     background-color:black;
-}
-
-div#meta {
-    position:relative;
-    float:left;
-    margin-left:35px;
 }
