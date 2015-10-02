@@ -240,55 +240,63 @@ function isRivalPiece() {
 		var x = parseInt(selectedPiece.positionX) - 1;
 
 		if (board[x][y_minus] != empty) {
-			board[x][y_minus] = empty;
-			$('div.square_dark[data-positionX="'+x+'"][data-positionY="'+y_minus+'"]')
-				.css('background-image', 'none');
-			lightPieces--;
-			$('#rojas').text(lightPieces);
-			checkForWinner();
-			isRival = true;
-			console.log("isRival");
-			return isRival;
+			if (board[x][y_minus].team != TURN) {
+				board[x][y_minus] = empty;
+				$('div.square_dark[data-positionX="'+x+'"][data-positionY="'+y_minus+'"]')
+					.css('background-image', 'none');
+				lightPieces--;
+				$('#rojas').text(lightPieces);
+				checkForWinner();
+				isRival = true;
+				console.log("isRival");
+				return isRival;
+			}	
 		}
 
 		if (board[x][y_more] != empty) {
-			board[x][y_more] = empty;
-			$('div.square_dark[data-positionX="'+x+'"][data-positionY="'+y_more+'"]')
-				.css('background-image', 'none');
-			lightPieces--;
-			$('#rojas').text(lightPieces);
-			checkForWinner();
-			isRival = true;
-			console.log("isRival");
-			return isRival;
+			if (board[x][y_more].team != TURN) {
+				board[x][y_more] = empty;
+				$('div.square_dark[data-positionX="'+x+'"][data-positionY="'+y_more+'"]')
+					.css('background-image', 'none');
+				lightPieces--;
+				$('#rojas').text(lightPieces);
+				checkForWinner();
+				isRival = true;
+				console.log("isRival");
+				return isRival;
+			}
 		}
 	}
 
 	if (TURN == light) {
 		var x = parseInt(selectedPiece.positionX) + 1;
-
-		if (board[x][y_minus] != empty) {
-			board[x][y_minus] = empty;
-			$('div.square_dark[data-positionX="'+x+'"][data-positionY="'+y_minus+'"]')
-				.css('background-image', 'none');
-			darkPieces--;
-			$('#negras').text(darkPieces);
-			checkForWinner(); 
-			isRival = true;
-			console.log("isRival");
-			return isRival;
+		if (board[x][y_minus].team != TURN) {
+			if (board[x][y_minus] != empty) {
+				board[x][y_minus] = empty;
+				$('div.square_dark[data-positionX="'+x+'"][data-positionY="'+y_minus+'"]')
+					.css('background-image', 'none');
+				darkPieces--;
+				$('#negras').text(darkPieces);
+				checkForWinner(); 
+				isRival = true;
+				console.log("isRival");
+				return isRival;
+			}
 		}
+		
 
 		if (board[x][y_more] != empty) {
-			board[x][y_more] = empty;
-			$('div.square_dark[data-positionX="'+x+'"][data-positionY="'+y_more+'"]')
-				.css('background-image', 'none');
-			darkPieces--;
-			$('#negras').text(darkPieces);
-			checkForWinner();  
-			isRival = true;
-			console.log("isRival");
-			return isRival;
+			if (board[x][y_more].team != TURN) {
+				board[x][y_more] = empty;
+				$('div.square_dark[data-positionX="'+x+'"][data-positionY="'+y_more+'"]')
+					.css('background-image', 'none');
+				darkPieces--;
+				$('#negras').text(darkPieces);
+				checkForWinner();  
+				isRival = true;
+				console.log("isRival");
+				return isRival;
+			}
 		}
 	}
 	return isRival;
@@ -296,16 +304,16 @@ function isRivalPiece() {
 
 function checkForWinner() {
 	if (darkPieces == 0) {
-		alert("Piezas negras GANAN!");
-		initializeArrays();
+		alert("Piezas rojas GANAN!");
+		/*initializeArrays();
     	setUpBoard();
-    	setUpPieces();
+    	setUpPieces();*/
 	}
 
 	if (lightPieces == 0) {
-		alert("Piezas rojas GANAN!");
-		initializeArrays();
+		alert("Piezas negras GANAN!");
+		/*initializeArrays();
     	setUpBoard();
-    	setUpPieces();
+    	setUpPieces();*/
 	}
 }
