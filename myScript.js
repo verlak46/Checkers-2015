@@ -232,7 +232,7 @@ function isValidMove() {
 
 function isRivalPiece() {
 	var isRival = false;
-	
+
 	var y_minus = parseInt(selectedPiece.positionY) - 1;
 	var y_more = parseInt(selectedPiece.positionY) + 1;
 
@@ -245,6 +245,7 @@ function isRivalPiece() {
 				.css('background-image', 'none');
 			lightPieces--;
 			$('#rojas').text(lightPieces);
+			checkForWinner();
 			isRival = true;
 			console.log("isRival");
 			return isRival;
@@ -256,6 +257,7 @@ function isRivalPiece() {
 				.css('background-image', 'none');
 			lightPieces--;
 			$('#rojas').text(lightPieces);
+			checkForWinner();
 			isRival = true;
 			console.log("isRival");
 			return isRival;
@@ -270,7 +272,8 @@ function isRivalPiece() {
 			$('div.square_dark[data-positionX="'+x+'"][data-positionY="'+y_minus+'"]')
 				.css('background-image', 'none');
 			darkPieces--;
-			$('#negras').text(darkPieces); 
+			$('#negras').text(darkPieces);
+			checkForWinner(); 
 			isRival = true;
 			console.log("isRival");
 			return isRival;
@@ -281,11 +284,28 @@ function isRivalPiece() {
 			$('div.square_dark[data-positionX="'+x+'"][data-positionY="'+y_more+'"]')
 				.css('background-image', 'none');
 			darkPieces--;
-			$('#negras').text(darkPieces);  
+			$('#negras').text(darkPieces);
+			checkForWinner();  
 			isRival = true;
 			console.log("isRival");
 			return isRival;
 		}
 	}
 	return isRival;
+}
+
+function checkForWinner() {
+	if (darkPieces == 0) {
+		alert("Piezas negras GANAN!");
+		initializeArrays();
+    	setUpBoard();
+    	setUpPieces();
+	}
+
+	if (lightPieces == 0) {
+		alert("Piezas rojas GANAN!");
+		initializeArrays();
+    	setUpBoard();
+    	setUpPieces();
+	}
 }
